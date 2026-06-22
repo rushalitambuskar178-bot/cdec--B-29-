@@ -5,7 +5,7 @@ pipeline {
 
         stage('PULL STAGE') {
             steps {
-                git 'https://github.com/rushalitambuskar178-bot/cdec--B-29-.git'
+                git 'https://github.com/nitindrathod4-alt/my-new-folder.git'
                 echo 'Pull Success'
             }
         }
