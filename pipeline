@@ -1,20 +1,41 @@
 pipeline {
     agent any
+
     stages {
-        stage ('PULL STAGE') {
+
+        stage('PULL STAGE') {
             steps {
-                echo 'PULL SUCCESS'
+                git 'https://github.com/rushalitambuskar178-bot/cdec--B-29-.git'
+                echo 'Pull Success'
             }
         }
-        stage ('BUILD') {
+
+        stage('BUILD STAGE') {
             steps {
-                echo 'TEST SUCCESS'
+                dir('cdec-b29-master/backend') {
+                    sh '''
+                        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+                        export PATH=$JAVA_HOME/bin:$PATH
+
+                        java -version
+                        javac -version
+
+                        mvn clean package -DskipTests
+                    '''
+                }
             }
         }
-        stage ('test stage') {
+
+        stage('TEST STAGE') {
             steps {
-                echo 'TEST SUCCESS'
+                echo 'Test Success'
             }
-        }    
+        }
+
+        stage('DEPLOY STAGE') {
+            steps {
+                echo 'Deploy Success'
+            }
+        }
     }
 }
